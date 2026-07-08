@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OTTO · Cotizador Empresarial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site">
+    <div class="wrap">
+      <a class="logo" href="#">
+        <img src="assets/logo-header.webp" alt="OTTO">
+        <span class="divider"></span>
+        <span class="sub">Cotizador</span>
+      </a>
+      <div class="header-right">
+        <div class="cur-toggle">
+          <button data-cur="usd" class="on">USD</button>
+          <button data-cur="cop">COP</button>
+        </div>
+        <button class="nav-cta" data-scroll>Cotizar ahora</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Licencias BIM para empresas</div>
+      <h1>Arma tu paquete y mira el precio <span class="grad">al instante</span></h1>
+      <p>Activa los servicios que necesitas, elige cuántos usuarios y compara el costo mensual, semestral y anual. Desde 30 usuarios, licencias ilimitadas.</p>
+    </div>
+  </section>
+
+  <!-- Cotizador unificado -->
+  <section class="section alt" id="tool">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">Cotizador</div>
+        <h2>Precio, descuento y ahorro</h2>
+        <p>La tabla es el precio de referencia por usuario. Las tarjetas de abajo son tu precio real según los servicios y usuarios que elijas.</p>
+      </div>
+
+      <div id="trm-note" class="trm-note"></div>
+
+      <!-- Tabla: referencia vs propuesto por usuario + servicios activables -->
+      <div class="block-title">Servicios · valor por usuario: referencia <span>v/s</span> propuesto <span>(activa o desactiva)</span></div>
+      <div id="cust-table"></div>
+
+      <!-- Control de usuarios (junto a las tarjetas) -->
+      <div class="users-bar mt">
+        <div class="ub-field">
+          <label for="cust-num">Usuarios</label>
+          <input type="number" id="cust-num" value="15" min="1" max="200">
+        </div>
+        <input type="range" id="cust-range" min="1" max="60" value="15">
+        <span id="cust-users-note" class="ub-note"></span>
+      </div>
+
+      <!-- 3 tarjetas configuradas dinámicas -->
+      <div class="block-title">Tu precio configurado · total del equipo <span id="cards-sub"></span></div>
+      <div id="cust-cards"></div>
+
+      <div id="cust-foot"></div>
+
+      <div class="export-bar">
+        <button id="btn-export" class="btn primary">⤓ Exportar cotización (PDF)</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site">
+    <div class="wrap">OTTO · Más de 10 años de experiencia BIM en Latinoamérica</div>
+  </footer>
+
+  <!-- Documento imprimible (solo visible al exportar/imprimir) -->
+  <div id="print-doc"></div>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
