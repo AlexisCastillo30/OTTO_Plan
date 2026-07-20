@@ -483,6 +483,19 @@ canvas { width: 100%; height: auto; display: block; }
 }
 
 /* ---------- Barra de exportar ----------------------------------------------- */
+.recipient { margin-top: 34px; }
+.recipient-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;
+  background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 18px 22px; box-shadow: var(--shadow-sm);
+}
+.rc-field { display: flex; flex-direction: column; gap: 5px; }
+.rc-field label { font-size: 12px; color: var(--txt-dim); font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
+.rc-field input {
+  background: #fff; border: 1px solid var(--line-2); color: var(--navy);
+  border-radius: var(--radius-sm); padding: 10px 12px; font-family: var(--font); font-size: 14px;
+}
+
 .export-bar { margin-top: 26px; text-align: center; }
 .export-bar .btn { padding: 14px 28px; font-size: 15px; }
 
@@ -493,6 +506,8 @@ canvas { width: 100%; height: auto; display: block; }
   #print-doc { display: block !important; }
   body { background: #fff; }
   @page { margin: 14mm; }
+  #print-doc p, #print-doc li, #print-doc ul, #print-doc tr { page-break-inside: avoid; }
+  #print-doc .terms { page-break-before: always; break-before: page; }
 }
 
 /* ---------- Footer ---------------------------------------------------------- */

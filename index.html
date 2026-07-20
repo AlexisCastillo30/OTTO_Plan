@@ -69,6 +69,29 @@
 
       <div id="cust-foot"></div>
 
+      <!-- Datos del destinatario (se imprimen en el PDF) -->
+      <div class="recipient">
+        <div class="block-title">Datos del destinatario <span>(aparecen en el PDF)</span></div>
+        <div class="recipient-grid">
+          <div class="rc-field">
+            <label for="rc-company">Empresa / Señores</label>
+            <input type="text" id="rc-company" placeholder="Empresa">
+          </div>
+          <div class="rc-field">
+            <label for="rc-attn">Atención (Atn.)</label>
+            <input type="text" id="rc-attn" placeholder="Persona a quien va dirigida">
+          </div>
+          <div class="rc-field">
+            <label for="rc-number">N.º de cotización</label>
+            <input type="text" id="rc-number" placeholder="0008">
+          </div>
+          <div class="rc-field">
+            <label for="rc-city">Ciudad</label>
+            <input type="text" id="rc-city" placeholder="Bogotá D.C.">
+          </div>
+        </div>
+      </div>
+
       <div class="export-bar">
         <button id="btn-export" class="btn primary">⤓ Exportar cotización (PDF)</button>
       </div>

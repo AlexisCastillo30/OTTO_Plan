@@ -268,15 +268,44 @@ function buildPrintDoc() {
   const annual = priceFor(apps, u, 'annual', isFull);
   const discTxt = pctTxt(1 - annual.price / annual.list);
 
+  // Datos del destinatario (ingresados en la UI)
+  const val = id => (document.getElementById(id)?.value || '').trim();
+  const company = val('rc-company');
+  const attn = val('rc-attn');
+  const quoteNo = val('rc-number');
+  const city = val('rc-city') || 'Bogotá D.C.';
+
+  const recipientBlock = (company || attn) ? `
+      <div style="font-size:13px;margin-bottom:20px;line-height:1.6">
+        <div>Señores:</div>
+        ${company ? `<div style="font-weight:800;letter-spacing:.5px">${company}</div>` : ''}
+        ${attn ? `<div>Atn.: ${attn}</div>` : ''}
+      </div>
+      <div style="font-size:15px;font-weight:700;color:#022457;letter-spacing:.5px;margin-bottom:20px">COTIZACIÓN OFICIAL – OTTO APIS</div>` : '';
+
+  // Descripción de las aplicaciones a cotizar (según lo seleccionado)
+  const appBullets = apps.map(a => `<li><b>${a.name}:</b> ${a.tag}.</li>`).join('');
+  const appsBlock = `
+      <div style="margin-bottom:20px">
+        <div style="font-size:14px;font-weight:700;color:#022457;margin-bottom:6px"></div>
+        <div style="font-size:13px;font-weight:600;margin-bottom:6px">Descripción del servicio:</div>
+        <p style="margin:0 0 10px;font-size:12px;line-height:1.6;color:#0b1d3a">Ponemos a su disposición las siguientes aplicaciones BIM para Autodesk Revit, orientadas a automatizar tareas repetitivas, reducir errores de coordinación y acelerar los flujos de trabajo de su equipo. El servicio se ofrece bajo modalidad de suscripción, ajustándose el precio según la cantidad de usuarios activos.</p>
+        <ul style="margin:0 0 4px 18px;padding:0;font-size:12px;line-height:1.6;color:#0b1d3a">${appBullets}</ul>
+      </div>`;
+
   return `
     <div style="font-family:Poppins,Arial,sans-serif;color:#0b1d3a;max-width:720px;margin:0 auto;">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid #022457;padding-bottom:16px;margin-bottom:20px">
         <img src="${logo}" alt="OTTO" style="height:38px">
         <div style="text-align:right">
-          <div style="font-size:20px;font-weight:800;color:#022457">Cotización</div>
-          <div style="font-size:12px;color:#5c6b82">${date}</div>
+          <div style="font-size:12px;color:#5c6b82">${city} ${date}</div>
+          ${quoteNo ? `<div style="font-size:12px;color:#5c6b82">Cotización No. ${quoteNo}</div>` : ''}
         </div>
       </div>
+
+      ${recipientBlock}
+
+      ${appsBlock}
 
       <div style="display:flex;gap:24px;font-size:13px;margin-bottom:18px">
         <div><b>Usuarios:</b> ${u}${u >= state.threshold ? ' (ilimitado)' : ''}</div>
@@ -305,9 +334,60 @@ function buildPrintDoc() {
       </div>
       ${hasBEP && unlimited ? `<div style="margin-top:12px;background:#e9f7f0;border:1px solid #bfe6d3;border-radius:10px;padding:12px 16px;font-size:13px;color:#1f9d68"><b>✓ Incluye Reporte en lote (BEP Revisor):</b> <span style="color:#0b1d3a">revisa varios modelos y genera un Excel a detalle.</span></div>` : ''}
 
-      <div style="margin-top:24px;font-size:11px;color:#9aa8bd;border-top:1px solid #e3e9f2;padding-top:12px">
+      <div style="margin-top:12px;font-size:12px;color:#0b1d3a"><b>Nota:</b> Los precios no incluyen IVA hay que sumarlo al costo final de la actualización.</div>
+
+      ${termsBlock()}
+
+      <div style="margin-top:20px;font-size:13px;line-height:1.5">
+        <div style="font-weight:700;color:#022457;margin-bottom:6px">ACEPTACIÓN</div>
+        <p style="margin:0 0 8px">Agradecemos la confianza depositada en Otto Apis. Estamos a su disposición para resolver cualquier inquietud o modificar los términos según requiera su empresa.</p>
+        <p style="margin:0 0 4px">Para mayor información o dudas adicionales, por favor contactar:</p>
+        <div>Teléfono: [314 3839286 - 350 8376096]</div>
+        <div>Correo: [appsotto00@gmail.com]</div>
+      </div>
+
+      <div style="margin-top:20px;font-size:13px;line-height:1.5">
+        <p style="margin:0 0 22px">Atentamente,</p>
+        <div style="font-weight:700;color:#022457">Ing. Christian Sarmiento</div>
+        <div style="color:#5c6b82">Partner-Director</div>
+      </div>
+
+      <div style="margin-top:16px;font-size:11px;color:#9aa8bd;border-top:1px solid #e3e9f2;padding-top:10px">
         OTTO · Más de 10 años de experiencia BIM en Latinoamérica · Cotización generada el ${date}.
       </div>
+    </div>`;
+}
+
+// Términos y condiciones (texto legal fijo de la cotización)
+function termsBlock() {
+  const h = t => `<div style="font-weight:700;color:#022457;font-size:13px;margin:12px 0 5px">${t}</div>`;
+  const p = t => `<p style="margin:0 0 8px;font-size:12px;line-height:1.6;color:#0b1d3a">${t}</p>`;
+  return `
+    <div class="terms" style="margin-top:28px;border-top:1px solid #e3e9f2;padding-top:16px">
+      <div style="font-weight:800;color:#022457;font-size:15px;letter-spacing:.5px;margin-bottom:8px">TÉRMINOS Y CONDICIONES</div>
+
+      ${h('Licencias de escritorio:')}
+      ${p('Consisten en aplicaciones descargables que el usuario instala directamente en su computador. Estas licencias se habilitan tras el registro del usuario, selección del producto, y pago en línea a través de la pasarela de pagos PayU. El usuario podrá acceder, desde su portal personal, a las versiones disponibles del software correspondientes a las últimas cinco versiones de Autodesk Revit en idioma inglés.')}
+
+      ${h('Métodos y condiciones de pago:')}
+      ${p('Los pagos se procesan exclusivamente mediante la pasarela de pagos PayU, que actúa como intermediario de pagos. El usuario deberá:')}
+      <ul style="margin:0 0 8px 18px;padding:0;font-size:12px;line-height:1.6;color:#0b1d3a">
+        <li>Registrarse en la plataforma de OTTO APIS.</li>
+        <li>Seleccionar el producto o servicio deseado.</li>
+        <li>Realizar el pago a través de PayU.</li>
+      </ul>
+      ${p('Esperar la confirmación automática de la activación de la licencia.')}
+      ${p('La activación del servicio se realizará de forma inmediata, siempre que el pago haya sido aprobado satisfactoriamente.')}
+
+      ${h('Impuestos y tributos:')}
+      ${p('Los precios pueden incluir el Impuesto al Valor Agregado (IVA) y demás tributos aplicables según la jurisdicción del usuario. En Colombia, el servicio está sujeto al régimen tributario vigente. Los usuarios internacionales serán responsables de pagar los impuestos locales en su país de residencia si aplica.')}
+
+      ${p('<b>Nota:</b> Al momento de realizar la compra se aceptarán los siguientes documentos:')}
+      <ul style="margin:0 0 8px 18px;padding:0;font-size:12px;line-height:1.6;color:#0b1d3a">
+        <li>Autorización para tratamiento de datos.</li>
+        <li>Política de Protección de Datos.</li>
+        <li>Términos y Condiciones.</li>
+      </ul>
     </div>`;
 }
 
