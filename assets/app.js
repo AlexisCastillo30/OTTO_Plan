@@ -380,7 +380,7 @@ function termsBlock() {
       ${p('La activación del servicio se realizará de forma inmediata, siempre que el pago haya sido aprobado satisfactoriamente.')}
 
       ${h('Impuestos y tributos:')}
-      ${p('Los precios pueden incluir el Impuesto al Valor Agregado (IVA) y demás tributos aplicables según la jurisdicción del usuario. En Colombia, el servicio está sujeto al régimen tributario vigente. Los usuarios internacionales serán responsables de pagar los impuestos locales en su país de residencia si aplica.')}
+      ${p('Los precios no incluyen el Impuesto al Valor Agregado (IVA) y demás tributos aplicables según la jurisdicción del usuario. En Colombia, el servicio está sujeto al régimen tributario vigente. Los usuarios internacionales serán responsables de pagar los impuestos locales en su país de residencia si aplica.')}
 
       ${p('<b>Nota:</b> Al momento de realizar la compra se aceptarán los siguientes documentos:')}
       <ul style="margin:0 0 8px 18px;padding:0;font-size:12px;line-height:1.6;color:#0b1d3a">

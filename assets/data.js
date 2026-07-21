@@ -11,10 +11,10 @@ const APPS = [
   { id: 'bep-revisor',    name: 'BEP Revisor',    tag: 'Verifica modelos BIM en Revit según el BEP',        monthly: 65, semiannual: 294, annual: 432 },
   { id: 'arch-finish',    name: 'Arch Finish',    tag: 'Acabados arquitectónicos automatizados',            monthly: 45, semiannual: 204, annual: 298 },
   { id: 'parameter-tool', name: 'Parameter Tool', tag: 'Gestión masiva de parámetros',                      monthly: 15, semiannual: 68,  annual: 100 },
-  { id: 'xyz',            name: 'XYZ',            tag: 'Coordenadas y geolocalización de modelos',          monthly: 15, semiannual: 68,  annual: 100 },
+  { id: 'xyz',            name: 'XYZ',            tag: 'Coordenadas y geolocalización de elementos',          monthly: 15, semiannual: 68,  annual: 100 },
   { id: 'voids',          name: 'Voids',          tag: 'Detección y gestión de vacíos',                     monthly: 39, semiannual: 176, annual: 258 },
-  { id: 'bep-civil',      name: 'BEP Civil',      tag: 'Revisión BEP para infraestructura civil',           monthly: 39, semiannual: 176, annual: 258 },
-  { id: 'datasync',       name: 'DataSync',       tag: 'Sincronización de datos entre modelos',             monthly: 39, semiannual: 176, annual: 258 },
+  { id: 'bep-civil',      name: 'BEP Civil',      tag: 'Revisión BEP para modelos en Civil 3D',           monthly: 39, semiannual: 176, annual: 258 },
+  { id: 'datasync',       name: 'DataSync',       tag: 'Gestión masiva de parámetros de los modelos Civil 3D',             monthly: 39, semiannual: 176, annual: 258 },
 ];
 
 // --- Periodos de facturación --------------------------------------------------
