@@ -83,17 +83,42 @@
           </div>
           <div class="rc-field">
             <label for="rc-number">N.º de cotización</label>
-            <input type="text" id="rc-number" placeholder="0008">
+            <input type="text" id="rc-number" placeholder="00016">
           </div>
           <div class="rc-field">
             <label for="rc-city">Ciudad</label>
             <input type="text" id="rc-city" placeholder="Bogotá D.C.">
           </div>
         </div>
+
+        <div class="block-title mt">Opciones del documento <span>(cómo se arma la cotización)</span></div>
+        <div class="recipient-grid">
+          <div class="rc-field">
+            <label for="rc-plan">Plan a cotizar</label>
+            <select id="rc-plan">
+              <option value="annual" selected>Anual</option>
+              <option value="semiannual">Semestral</option>
+              <option value="monthly">Mensual</option>
+            </select>
+          </div>
+          <div class="rc-field">
+            <label>Cortesía comercial</label>
+            <label class="rc-check"><input type="checkbox" id="rc-courtesy"> Incluir 2 meses del portafolio completo</label>
+          </div>
+          <div class="rc-field">
+            <label>Equivalencia en COP</label>
+            <label class="rc-check"><input type="checkbox" id="rc-showcop"> Añadir columna en pesos (solo en USD)</label>
+          </div>
+        </div>
+        <div class="rc-field mt">
+          <label for="rc-scope">Alcance de esta propuesta <span class="rc-hint">(opcional — si lo dejas vacío, la sección no aparece)</span></label>
+          <textarea id="rc-scope" rows="3" placeholder="Ej.: Esta propuesta corresponde a la licencia anual de BEP Revisor en su configuración estándar. No incluye el módulo MultiReport…"></textarea>
+        </div>
       </div>
 
       <div class="export-bar">
         <button id="btn-export" class="btn primary">⤓ Exportar cotización (PDF)</button>
+        <div class="export-hint">Los textos legales, datos bancarios y la firma se editan en <b>assets/terms.js</b>.</div>
       </div>
     </div>
   </section>
@@ -106,6 +131,7 @@
   <div id="print-doc"></div>
 
   <script src="assets/data.js"></script>
+  <script src="assets/terms.js"></script>
   <script src="assets/app.js"></script>
 </body>
 </html>

@@ -429,6 +429,24 @@ canvas { width: 100%; height: auto; display: block; }
 .price-table.check .ta-l { display: flex; align-items: center; }
 .svc-info { display: flex; flex-direction: column; }
 .chk { flex: none; }
+.v-inc { display: block; font-size: 13px; font-weight: 600; color: var(--blue); }
+
+/* encabezado de plataforma (Autodesk Revit / Civil 3D) */
+.price-table .tr-group td {
+  background: var(--bg-alt) !important; font-size: 11px; font-weight: 700; color: var(--txt-dim);
+  text-transform: uppercase; letter-spacing: 1.2px; padding: 9px 16px; border-bottom: 1px solid var(--line-2);
+}
+.price-table.check .tr-group { cursor: default; }
+
+/* módulos (se activan sobre otra app) */
+.price-table.check tr.addon .ta-l { padding-left: 34px; }
+.badge-mod {
+  display: inline-block; margin-left: 8px; background: #eef4ff; color: var(--blue);
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px;
+  padding: 2px 7px; border-radius: 999px; vertical-align: 1px;
+}
+.price-table.check tr.locked { opacity: .55; cursor: not-allowed; }
+.price-table.check tr.locked:hover td { background: transparent; }
 
 /* tramos de descuento */
 .tiers-box { margin-top: 8px; }
@@ -490,14 +508,25 @@ canvas { width: 100%; height: auto; display: block; }
   padding: 18px 22px; box-shadow: var(--shadow-sm);
 }
 .rc-field { display: flex; flex-direction: column; gap: 5px; }
+.rc-field.mt { margin-top: 16px; }
 .rc-field label { font-size: 12px; color: var(--txt-dim); font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
-.rc-field input {
+.rc-field input, .rc-field select, .rc-field textarea {
   background: #fff; border: 1px solid var(--line-2); color: var(--navy);
   border-radius: var(--radius-sm); padding: 10px 12px; font-family: var(--font); font-size: 14px;
 }
+.rc-field textarea { resize: vertical; line-height: 1.5; }
+.rc-field .rc-hint { text-transform: none; letter-spacing: 0; font-weight: 500; color: #9aa8bd; }
+.rc-check {
+  display: flex; align-items: center; gap: 9px; text-transform: none; letter-spacing: 0;
+  font-size: 13px; font-weight: 500; color: var(--txt); cursor: pointer;
+  border: 1px solid var(--line-2); border-radius: var(--radius-sm); padding: 11px 12px;
+}
+.rc-check input { flex: none; width: 16px; height: 16px; accent-color: var(--blue); }
 
 .export-bar { margin-top: 26px; text-align: center; }
 .export-bar .btn { padding: 14px 28px; font-size: 15px; }
+.export-hint { margin-top: 10px; font-size: 12px; color: var(--txt-dim); }
+.export-hint b { color: var(--navy); }
 
 /* ---------- Documento imprimible / impresión -------------------------------- */
 #print-doc { display: none; }
@@ -505,8 +534,15 @@ canvas { width: 100%; height: auto; display: block; }
   header.site, section, footer.site { display: none !important; }
   #print-doc { display: block !important; }
   body { background: #fff; }
-  @page { margin: 14mm; }
-  #print-doc p, #print-doc li, #print-doc ul, #print-doc tr { page-break-inside: avoid; }
+  /* Margen 0 en la hoja: sin espacio reservado, el navegador NO imprime su
+     encabezado (fecha / título) ni su pie (URL). El margen real lo pone
+     `.doc` con padding, definido en printStyles() de app.js. */
+  @page { margin: 0; }
+  #print-doc p, #print-doc li, #print-doc ul { page-break-inside: avoid; }
+  #print-doc .tbl tr, #print-doc .sec, #print-doc .callout, #print-doc .sign { page-break-inside: avoid; }
+  /* Los términos y condiciones siempre arrancan en página nueva. El margen
+     superior lo pone el `thead` repetido de la tabla `.sheet` (ver app.js),
+     así que aquí no hace falta padding extra. */
   #print-doc .terms { page-break-before: always; break-before: page; }
 }
 
